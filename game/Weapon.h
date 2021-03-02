@@ -287,6 +287,7 @@ public:
 	struct weaponFlags_s {
 		bool		attackAltHitscan	:1;
 		bool		attackHitscan		:1;
+		bool		towerSpawn			:1;
 		bool		hide				:1;
 		bool		disabled			:1;
 		bool		hasBloodSplat		:1;
@@ -338,6 +339,7 @@ public:
 
 	// we maintain local copies of the projectile and brass dictionaries so they
 	// do not have to be copied across the DLL boundary when entities are spawned
+	idDict							attackAltTowerDict;
 	idDict							attackAltDict;
 	idDict							attackDict;
 	idDict							brassDict;

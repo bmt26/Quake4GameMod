@@ -957,6 +957,27 @@ void rvWeapon::InitDefs( void ) {
 		wfl.attackAltHitscan = true;
 	} 
 
+	// Alternate tower
+	attackAltTowerDict.Clear();
+	if (spawnArgs.GetString("def_alttower", "", &name) && *name) {
+		def = gameLocal.FindEntityDef(name, false);
+		if (!def) {
+			gameLocal.Warning("Unknown alt tower '%s' for weapon '%s'", name, weaponDef->GetName());
+		}
+		else {
+			spawnclass = def->dict.GetString("spawnclass");
+			cls = idClass::GetClass(spawnclass);
+			if (!cls || !cls->IsType(idProjectile::GetClassType())) {
+				gameLocal.Warning("Invalid spawnclass '%s' for alt projectile '%s' (used by weapon '%s')", spawnclass, name, weaponDef->GetName());
+				wfl.towerSpawn = false;
+			}
+			else {
+				attackAltTowerDict = def->dict;
+				wfl.towerSpawn = true;
+			}
+		}
+	}
+
 	// get the melee damage def
 	meleeDistance = spawnArgs.GetFloat( "melee_distance" );
 	if ( spawnArgs.GetString( "def_melee", "", &name ) && *name ) {
@@ -2596,7 +2617,12 @@ void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuse
 		if ( altAttack ? wfl.attackAltHitscan : wfl.attackHitscan ) {
 			Hitscan( dict, muzzleOrigin, muzzleAxis, num_attacks, spread, power );
 		} else {
-			LaunchProjectiles( dict, muzzleOrigin, muzzleAxis, num_attacks, spread, fuseOffset, power );
+			if (wfl.towerSpawn) {
+				gameLocal.Warning("Test");
+			}
+			else {
+				LaunchProjectiles(dict, muzzleOrigin, muzzleAxis, num_attacks, spread, fuseOffset, power);
+			}
 		}
 		//asalmon:  changed to keep stats even in single player 
 		statManager->WeaponFired( owner, weaponIndex, num_attacks );

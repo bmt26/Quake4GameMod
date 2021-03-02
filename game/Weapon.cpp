@@ -965,9 +965,8 @@ void rvWeapon::InitDefs( void ) {
 			gameLocal.Warning("Unknown alt tower '%s' for weapon '%s'", name, weaponDef->GetName());
 		}
 		else {
-			spawnclass = def->dict.GetString("spawnclass");
-			cls = idClass::GetClass(spawnclass);
-			if (!cls || !cls->IsType(idProjectile::GetClassType())) {
+			spawnclass = def->dict.GetString("tower_is_enabled");
+			if (spawnclass=="true") {
 				gameLocal.Warning("Invalid spawnclass '%s' for alt projectile '%s' (used by weapon '%s')", spawnclass, name, weaponDef->GetName());
 				wfl.towerSpawn = false;
 			}
@@ -2612,13 +2611,13 @@ void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuse
 	
 	// The attack is either a hitscan or a launched projectile, do that now.
 	if ( !gameLocal.isClient ) {
-		idDict& dict = altAttack ? attackAltDict : attackDict;
+		idDict& dict = altAttack ? wfl.towerSpawn ? attackAltTowerDict : attackAltDict : attackDict;
 		power *= owner->PowerUpModifier( PMOD_PROJECTILE_DAMAGE );
 		if ( altAttack ? wfl.attackAltHitscan : wfl.attackHitscan ) {
 			Hitscan( dict, muzzleOrigin, muzzleAxis, num_attacks, spread, power );
 		} else {
 			if (wfl.towerSpawn) {
-				gameLocal.Warning("Test");
+				SpawnTower();
 			}
 			else {
 				LaunchProjectiles(dict, muzzleOrigin, muzzleAxis, num_attacks, spread, fuseOffset, power);
@@ -2628,6 +2627,45 @@ void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuse
 		statManager->WeaponFired( owner, weaponIndex, num_attacks );
 		
 	}
+}
+
+/*
+================
+rvWeapon::SpawnTower
+================
+*/
+void rvWeapon::SpawnTower() {
+	const char *key, *value;
+	int			i;
+	float		yaw;
+	idVec3		org;
+	idPlayer	*player;
+	idDict		dict;
+
+	player = gameLocal.GetLocalPlayer();
+	if (!player || !gameLocal.CheatsOk(false)) {
+		return;
+	}
+
+	yaw = player->viewAngles.yaw;
+
+	value = "char_marine";
+	dict.Set("classname", value);
+	dict.Set("angle", va("%f", yaw + 180));
+
+	org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 0, 1);
+	dict.Set("origin", org.ToString());
+
+
+	// RAVEN BEGIN
+	// kfuller: want to know the name of the entity I spawned
+	idEntity *newEnt = NULL;
+	gameLocal.SpawnEntityDef(dict, &newEnt);
+
+	if (newEnt)	{
+		gameLocal.Printf("spawned entity '%s'\n", newEnt->name.c_str());
+	}
+
 }
 
 /*

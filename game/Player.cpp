@@ -8210,8 +8210,9 @@ int GetItemBuyImpulse( const char* itemName )
 
 bool idPlayer::CanBuyItem( const char* itemName )
 {
-	itemBuyStatus_t buyStatus = ItemBuyStatus( itemName );
-	return( buyStatus == IBS_CAN_BUY );
+	//itemBuyStatus_t buyStatus = ItemBuyStatus( itemName );
+	//return( buyStatus == IBS_CAN_BUY );
+	return true;
 }
 
 
@@ -8370,9 +8371,9 @@ idPlayer::AttemptToBuyItem
 */
 bool idPlayer::AttemptToBuyItem( const char* itemName )
 {
-	if ( gameLocal.isClient ) {
-		return false;
-	}
+	//if ( gameLocal.isClient ) {
+	//	return false;
+	//}
 
 	if( !itemName ) {
 		return false;
@@ -8407,11 +8408,12 @@ bool idPlayer::AttemptToBuyItem( const char* itemName )
 }
 
 bool idPlayer::CanBuy( void ) {
-	bool ret = gameLocal.mpGame.IsBuyingAllowedRightNow();
-	if ( !ret ) {
-		return false;
-	}
-	return !spectating;
+	//bool ret = gameLocal.mpGame.IsBuyingAllowedRightNow();
+	//if ( !ret ) {
+	//	return false;
+	//}
+	//return !spectating;
+	return true;
 }
 
 

@@ -800,6 +800,11 @@ protected:
 	void					SetupHead( const char* modelKeyName = "", idVec3 headOffset = idVec3(0, 0, 0) );
 
 private:
+
+
+	void			SetupBuyMenuItems();
+
+
 	float					vehicleCameraDist;
 
 	jointHandle_t			hipJoint;

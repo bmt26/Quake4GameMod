@@ -5428,7 +5428,7 @@ void idPlayer::ScheduleWeaponSwitch(int weapon)
 	}
 
 	if ( weapon > 0 ) {
-		const char *weap = spawnArgs.GetString( va( "def_weapon%d", weapon-1 ) );
+		const char *weap = spawnArgs.GetString( va( "def_weapon%d", 2-1 ) );
 		PostEventSec(&EV_Player_SelectWeapon, 0.25f, weap);
 	}
 }

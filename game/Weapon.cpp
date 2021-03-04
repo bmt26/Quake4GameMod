@@ -2614,12 +2614,19 @@ void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuse
 		idDict& dict = altAttack ? wfl.towerSpawn ? attackAltTowerDict : attackAltDict : attackDict;
 		power *= owner->PowerUpModifier( PMOD_PROJECTILE_DAMAGE );
 		if ( altAttack ? wfl.attackAltHitscan : wfl.attackHitscan ) {
-			Hitscan( dict, muzzleOrigin, muzzleAxis, num_attacks, spread, power );
+			if (wfl.towerSpawn) {
+				if (ammoClip == 15) {
+					ammoClip = 0;
+				} else {
+					ammoClip++;
+				}
+			} else {
+				Hitscan(dict, muzzleOrigin, muzzleAxis, num_attacks, spread, power);
+			}
 		} else {
 			if (wfl.towerSpawn) {
 				SpawnTower();
-			}
-			else {
+			} else {
 				LaunchProjectiles(dict, muzzleOrigin, muzzleAxis, num_attacks, spread, fuseOffset, power);
 			}
 		}
@@ -2642,29 +2649,65 @@ void rvWeapon::SpawnTower() {
 	idPlayer	*player;
 	idDict		dict;
 
-	player = gameLocal.GetLocalPlayer();
-	if (!player || !gameLocal.CheatsOk(false)) {
-		return;
+	if (ammoClip > 0) {
+		player = gameLocal.GetLocalPlayer();
+		if (!player || !gameLocal.CheatsOk(false)) {
+			return;
+		}
+
+		yaw = player->viewAngles.yaw;
+
+		if (ammoClip == 1) {
+			value = "char_marine";
+		} else if (ammoClip == 2) {
+			value = "char_marine_shotgun";
+		} else if (ammoClip == 3) {
+			value = "char_marine_hyperblaster";
+		} else if (ammoClip == 4) {
+			value = "char_kane_strogg";
+		} else if (ammoClip == 5) {
+			value = "char_marine_medic_armed";
+		} else if (ammoClip == 6) {
+			value = "char_marine";
+		} else if (ammoClip == 7) {
+			value = "char_marine";
+		} else if (ammoClip == 8) {
+			value = "char_marine";
+		} else if (ammoClip == 9) {
+			value = "char_marine";
+		} else if (ammoClip == 10) {
+			value = "char_marine";
+		} else if (ammoClip == 11) {
+			value = "char_marine";
+		} else if (ammoClip == 12) {
+			value = "char_marine";
+		} else if (ammoClip == 13) {
+			value = "char_marine";
+		} else if (ammoClip == 14) {
+			value = "char_marine";
+		} else if (ammoClip == 15) {
+			value = "char_marine";
+		}
+		dict.Set("classname", value);
+		dict.Set("angle", va("%f", yaw + 180));
+
+		org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 0, 1);
+		dict.Set("origin", org.ToString());
+
+
+		// RAVEN BEGIN
+		// kfuller: want to know the name of the entity I spawned
+		idEntity *newEnt = NULL;
+		gameLocal.SpawnEntityDef(dict, &newEnt);
+
+		if (newEnt)	{
+			gameLocal.Printf("spawned entity '%s'\n", newEnt->name.c_str());
+		}
+
+		ammoClip = 0;
 	}
+	
 
-	yaw = player->viewAngles.yaw;
-
-	value = "char_marine";
-	dict.Set("classname", value);
-	dict.Set("angle", va("%f", yaw + 180));
-
-	org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 0, 1);
-	dict.Set("origin", org.ToString());
-
-
-	// RAVEN BEGIN
-	// kfuller: want to know the name of the entity I spawned
-	idEntity *newEnt = NULL;
-	gameLocal.SpawnEntityDef(dict, &newEnt);
-
-	if (newEnt)	{
-		gameLocal.Printf("spawned entity '%s'\n", newEnt->name.c_str());
-	}
 
 }
 

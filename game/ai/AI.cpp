@@ -3667,6 +3667,9 @@ idAI::
 */
 
 void idAI::OnDeath( void ){
+
+	gameLocal.GetLocalPlayer()->GiveCash(20);
+
 	if( vehicleController.IsDriving() ){
 		usercmd_t				usercmd;
 

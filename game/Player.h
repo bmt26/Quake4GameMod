@@ -794,6 +794,7 @@ public:
 	void					ClampCash( float minCash, float maxCash );
 	void					SetCash( float newCashAmount );
 	void					ResetCash();
+	float					ReturnCash();
 // RITUAL END
 
 protected:

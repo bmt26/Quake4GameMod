@@ -2624,7 +2624,7 @@ void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuse
 				Hitscan(dict, muzzleOrigin, muzzleAxis, num_attacks, spread, power);
 			}
 		} else {
-			if (wfl.towerSpawn) {
+			if (wfl.towerSpawn&&ammoClip!=7) {
 				SpawnTower();
 			} else {
 				LaunchProjectiles(dict, muzzleOrigin, muzzleAxis, num_attacks, spread, fuseOffset, power);
@@ -2651,24 +2651,27 @@ void rvWeapon::SpawnTower() {
 
 	if (ammoClip > 0) {
 		player = gameLocal.GetLocalPlayer();
-		if (!player || !gameLocal.CheatsOk(false)) {
+
+		if (player->ReturnCash()<20.0) {
 			return;
 		}
+
+		player->GiveCash(-20.0);
 
 		yaw = player->viewAngles.yaw;
 
 		if (ammoClip == 1) {
-			value = "char_marine";
+			value = "char_marine"; // Default
 		} else if (ammoClip == 2) {
-			value = "char_marine_shotgun";
+			value = "char_marine_shotgun"; //
 		} else if (ammoClip == 3) {
-			value = "char_marine_hyperblaster";
+			value = "char_marine_hyperblaster"; 
 		} else if (ammoClip == 4) {
 			value = "char_kane_strogg";
 		} else if (ammoClip == 5) {
-			value = "char_marine_medic_armed";
+			value = "char_marine_medic_armed"; // Can See Invisible Enemies
 		} else if (ammoClip == 6) {
-			value = "char_marine";
+			value = "char_marine_fatigues"; // Lots of HP Brute
 		} else if (ammoClip == 7) {
 			value = "char_marine";
 		} else if (ammoClip == 8) {
@@ -2703,8 +2706,6 @@ void rvWeapon::SpawnTower() {
 		if (newEnt)	{
 			gameLocal.Printf("spawned entity '%s'\n", newEnt->name.c_str());
 		}
-
-		ammoClip = 0;
 	}
 	
 

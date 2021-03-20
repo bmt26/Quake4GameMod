@@ -14055,6 +14055,11 @@ void idPlayer::ResetCash()
 	ClampCash( minCash, maxCash );
 }
 
+float idPlayer::ReturnCash()
+{
+	return buyMenuCash;
+}
+
 /**
  * Checks to see if the player can accept this item in their inventory
  *

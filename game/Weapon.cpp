@@ -2652,22 +2652,19 @@ void rvWeapon::SpawnTower() {
 	if (ammoClip > 0) {
 		player = gameLocal.GetLocalPlayer();
 
-		if (player->ReturnCash()<20.0) {
-			return;
-		}
-
-		player->GiveCash(-20.0);
-
 		yaw = player->viewAngles.yaw;
 
 		if (ammoClip == 1) {
-			value = "char_marine"; // Default
+			value = "char_kane_strogg_unarmed"; // Beacon
+			player->GiveCash(20.0);
+		} else if (player->ReturnCash()<20.0) {
+			return;
 		} else if (ammoClip == 2) {
-			value = "char_marine_shotgun"; //
+			value = "char_marine"; // Default
 		} else if (ammoClip == 3) {
-			value = "char_marine_hyperblaster"; 
+			value = "char_marine_shotgun"; 
 		} else if (ammoClip == 4) {
-			value = "char_kane_strogg";
+			value = "char_marine_hyperblaster";
 		} else if (ammoClip == 5) {
 			value = "char_marine_medic_armed"; // Can See Invisible Enemies
 		} else if (ammoClip == 6) {
@@ -2691,6 +2688,9 @@ void rvWeapon::SpawnTower() {
 		} else if (ammoClip == 15) {
 			value = "char_marine";
 		}
+
+		player->GiveCash(-20.0);
+
 		dict.Set("classname", value);
 		dict.Set("angle", va("%f", yaw + 180));
 

@@ -1198,6 +1198,35 @@ void idActor::CheckBlink( void ) {
 	idAnimator *animator = head.GetEntity() ? head->GetAnimator() : &this->animator;
 	animator->PlayAnim( ANIMCHANNEL_EYELIDS, blink_anim, gameLocal.time, 1 );
 
+
+	if (strcmp(spawnArgs.GetString("classname", ""), "char_kane_strogg_unarmed") == 0) {
+
+		const char *key, *value;
+		int			i;
+		float		yaw;
+		idVec3		org;
+		idDict		dict;
+
+
+		yaw = gameLocal.random.RandomFloat()*360;
+
+
+		value = "char_marine";
+		dict.Set("classname", value);
+		dict.Set("angle", va("%f", yaw + 180));
+		org = GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80*10 + idVec3(0, 0, 5);
+		dict.Set("origin", org.ToString());
+		// RAVEN BEGIN
+		// kfuller: want to know the name of the entity I spawned
+		idEntity *newEnt = NULL;
+		gameLocal.SpawnEntityDef(dict, &newEnt);
+
+		if (newEnt)	{
+			gameLocal.Printf("spawned entity '%s'\n", newEnt->name.c_str());
+		}
+	}
+
+
 	// set the next blink time
 	blink_time = gameLocal.time + blink_min + gameLocal.random.RandomFloat() * ( blink_max - blink_min );
 }

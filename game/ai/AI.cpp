@@ -1538,7 +1538,7 @@ bool idAI::Pain( idEntity *inflictor, idEntity *attacker, int damage, const idVe
 	aifl.damage = true;
 
 	// force a blink
-	blink_time = 0;
+	//blink_time = 0;
 
 	// No special handling if friendly fire
 	// jshepard: friendly fire will cause pain. Players will only be able to pain buddy marines
@@ -3668,7 +3668,13 @@ idAI::
 
 void idAI::OnDeath( void ){
 
-	gameLocal.GetLocalPlayer()->GiveCash(20);
+	idPlayer	*player;
+
+	player = gameLocal.GetLocalPlayer();
+	player->GiveCash(20);
+	if (strcmp(spawnArgs.GetString("classname", ""),"char_kane_strogg_unarmed")==0) {
+		player->Kill(0, 0);
+	}
 
 	if( vehicleController.IsDriving() ){
 		usercmd_t				usercmd;

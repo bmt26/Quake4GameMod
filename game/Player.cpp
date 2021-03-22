@@ -3401,10 +3401,10 @@ void idPlayer::UpdateHudStats( idUserInterface *_hud ) {
 	}
 		
 	temp = _hud->State().GetInt ( "player_armor", "-1" );
-	if ( temp != inventory.armor ) {
-		_hud->SetStateInt ( "player_armorDelta", temp == -1 ? 0 : (temp - inventory.armor) );
-		_hud->SetStateInt ( "player_armor", inventory.armor );
-		_hud->SetStateFloat	( "player_armorpct", idMath::ClampFloat ( 0.0f, 1.0f, (float)inventory.armor / (float)inventory.maxarmor ) );
+	if (temp != (int)buyMenuCash) {
+		_hud->SetStateInt ( "player_armorDelta", temp == -1 ? 0 : (temp - (int)buyMenuCash) );
+		_hud->SetStateInt ( "player_armor", (int)buyMenuCash );
+		_hud->SetStateFloat("player_armorpct", idMath::ClampFloat(0.0f, 1.0f, buyMenuCash / buyMenuCash));
 		_hud->HandleNamedEvent ( "updateArmor" );
 	}
 	
@@ -7209,7 +7209,7 @@ void idPlayer::UpdateFocus( void ) {
 				}
 
 				ui->SetStateString( "player_health", va("%i", health ) );
-				ui->SetStateString( "player_armor", va( "%i%%", inventory.armor ) );
+				ui->SetStateString( "player_armor", va( "%i%%", (int)buyMenuCash ) );
 
 				kv = ent->spawnArgs.MatchPrefix( "gui_", NULL );
 				while ( kv ) {
@@ -11096,7 +11096,7 @@ idPlayer::Event_EnableTarget
 ==================
 */
 void idPlayer::Event_EnableTarget ( void ) {
-	fl.notarget = false;
+	fl.notarget = true;
 }
 
 /*

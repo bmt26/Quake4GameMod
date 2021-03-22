@@ -1189,7 +1189,10 @@ void idActor::SetupBody( void ) {
 idActor::CheckBlink
 =====================
 */
-void idActor::CheckBlink( void ) {
+void idActor::CheckBlink(void) {
+	int	i, j;
+	const char *value;
+
 	// check if it's time to blink
 	if ( !blink_anim || ( health <= 0 ) || ( blink_time > gameLocal.time ) || !fl.allowAutoBlink ) {
 		return;
@@ -1201,34 +1204,79 @@ void idActor::CheckBlink( void ) {
 
 	if (strcmp(spawnArgs.GetString("classname", ""), "char_kane_strogg_unarmed") == 0) {
 
-		const char *key, *value;
-		int			i;
-		float		yaw;
-		idVec3		org;
-		idDict		dict;
-
-
-		yaw = gameLocal.random.RandomFloat()*360;
-
-
-		value = "char_marine";
-		dict.Set("classname", value);
-		dict.Set("angle", va("%f", yaw + 180));
-		org = GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80*10 + idVec3(0, 0, 5);
-		dict.Set("origin", org.ToString());
-		// RAVEN BEGIN
-		// kfuller: want to know the name of the entity I spawned
-		idEntity *newEnt = NULL;
-		gameLocal.SpawnEntityDef(dict, &newEnt);
-
-		if (newEnt)	{
-			gameLocal.Printf("spawned entity '%s'\n", newEnt->name.c_str());
+		for (i = 0; i < 4; i++) {
+			j = (int)(gameLocal.random.RandomFloat() * 11);
+			switch (j) {
+			case 0:
+				value = "monster_strogg_marine";
+				break;
+			case 1:
+				value = "monster_berserker";
+				break;
+			case 2:
+				value = "monster_failed_transfer";
+				break;
+			case 3:
+				value = "monster_gladiator";
+				break;
+			case 4:
+				value = "monster_grunt";
+				break;
+			case 5:
+				value = "monster_gunner";
+				break;
+			case 6:
+				value = "monster_ironmaiden";
+				break;
+			case 7:
+				value = "monster_lt_tank";
+				break;
+			case 8:
+				value = "monster_scientist";
+				break;
+			case 9:
+				value = "monster_slimy_transfer";
+				break;
+			case 10:
+				value = "monster_teleport_dropper";
+				break;
+			default:
+				value = "monster_strogg_marine";
+			}
+			SpawnEnemy(value);
 		}
 	}
 
 
 	// set the next blink time
-	blink_time = gameLocal.time + blink_min + gameLocal.random.RandomFloat() * ( blink_max - blink_min );
+	blink_time = gameLocal.time + blink_min + gameLocal.random.RandomFloat() * ( blink_max*5 - blink_min );
+}
+
+/*
+=====================
+idActor::SpawnEnemy
+=====================
+*/
+void idActor::SpawnEnemy(const char *value) {
+	const char *key;
+	int			i;
+	float		yaw;
+	idVec3		org;
+	idDict		dict;
+	
+	yaw = gameLocal.random.RandomFloat() * 360;
+
+	dict.Set("classname", value);
+	dict.Set("angle", va("%f", yaw + 180));
+	org = GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 * 3 + idVec3(0, 100, 5);
+	dict.Set("origin", org.ToString());
+	// RAVEN BEGIN
+	// kfuller: want to know the name of the entity I spawned
+	idEntity *newEnt = NULL;
+	gameLocal.SpawnEntityDef(dict, &newEnt);
+	if (newEnt)	{
+		gameLocal.Printf("spawned entity '%s'\n", newEnt->name.c_str());
+	}
 }
 
 /*

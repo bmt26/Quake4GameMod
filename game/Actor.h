@@ -143,7 +143,8 @@ public:
 	virtual bool			LoadAF( const char* keyname = NULL, bool purgeAF = false );
 	void					SetupBody( void );
 
-	virtual void			CheckBlink( void );
+	virtual void			CheckBlink(void);
+	virtual void			SpawnEnemy(const char *value);
 
 	virtual bool			GetPhysicsToVisualTransform( idVec3 &origin, idMat3 &axis );
 	virtual bool			GetPhysicsToSoundTransform( idVec3 &origin, idMat3 &axis );

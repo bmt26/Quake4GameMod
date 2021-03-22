@@ -4181,7 +4181,15 @@ idEntity *idAI::FindEnemy ( bool inFov, bool forceNearest, float maxDistSqr ){
 	// Iterate through the enemy team
 	for( actor = aiManager.GetEnemyTeam ( (aiTeam_t)team ); actor; actor = actor->teamNode.Next() ) {
 		// Skip hidden enemies and enemies that cant be targeted
-		if( actor->fl.notarget || actor->fl.isDormant || ( actor->IsHidden ( ) && !actor->IsInVehicle() ) ) {
+		if ( actor->fl.notarget || actor->fl.isDormant || (actor->IsHidden() && !actor->IsInVehicle())) {
+			continue;
+		}
+
+		if (strcmp(actor->spawnArgs.GetString("classname", ""), "char_kane_strogg_unarmed") != 0 && strcmp(spawnArgs.GetString("team", ""), "1") == 0) {
+			continue;
+		}
+
+		if (strcmp(actor->spawnArgs.GetString("classname", ""), "monster_slimy_transfer") == 0 && strcmp(spawnArgs.GetString("team", ""), "0") == 0 && strcmp(spawnArgs.GetString("classname", ""), "char_marine_medic_armed") != 0) {
 			continue;
 		}
 
@@ -4229,7 +4237,6 @@ idEntity *idAI::FindEnemy ( bool inFov, bool forceNearest, float maxDistSqr ){
 			bestEnemy = bestEnemyBackup;
 		}
 	}
-
 	gameLocal.pvs.FreeCurrentPVS( pvs );
 		
 	return bestEnemy;

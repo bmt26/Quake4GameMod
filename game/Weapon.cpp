@@ -2649,44 +2649,59 @@ void rvWeapon::SpawnTower() {
 	idPlayer	*player;
 	idDict		dict;
 
-	if (ammoClip > 0) {
+	if (ammoClip >= 0) {
 		player = gameLocal.GetLocalPlayer();
 
 		yaw = player->viewAngles.yaw;
 
-		if (ammoClip == 1) {
+		if (ammoClip == 0) {
 			value = "char_kane_strogg_unarmed"; // Beacon
-			player->GiveCash(20.0);
+			player->GiveCash(100.0);
 		} else if (player->ReturnCash()<20.0) {
 			return;
-		} else if (ammoClip == 2) {
+		} else if (ammoClip == 1) {
 			value = "char_marine"; // Default
-		} else if (ammoClip == 3) {
+		} else if (ammoClip == 2) {
 			value = "char_marine_shotgun"; 
-		} else if (ammoClip == 4) {
+		} else if (ammoClip == 3) {
 			value = "char_marine_hyperblaster";
-		} else if (ammoClip == 5) {
+		} else if (ammoClip == 4) {
 			value = "char_marine_medic_armed"; // Can See Invisible Enemies
-		} else if (ammoClip == 6) {
+		} else if (ammoClip == 5) {
 			value = "char_marine_fatigues"; // Lots of HP Brute
+		} else if (ammoClip == 6) {
+			value = "monster_strogg_marine";
+			player->GiveCash(20.0);
 		} else if (ammoClip == 7) {
-			value = "char_marine";
+			value = "monster_berserker";
+			player->GiveCash(20.0);
 		} else if (ammoClip == 8) {
-			value = "char_marine";
+			value = "monster_failed_transfer";
+			player->GiveCash(20.0);
 		} else if (ammoClip == 9) {
-			value = "char_marine";
+			value = "monster_gladiator";
+			player->GiveCash(20.0);
 		} else if (ammoClip == 10) {
-			value = "char_marine";
+			value = "monster_grunt";
+			player->GiveCash(20.0);
 		} else if (ammoClip == 11) {
-			value = "char_marine";
+			value = "monster_gunner";
+			player->GiveCash(20.0);
 		} else if (ammoClip == 12) {
-			value = "char_marine";
+			value = "monster_ironmaiden";
+			player->GiveCash(20.0);
 		} else if (ammoClip == 13) {
-			value = "char_marine";
+			value = "monster_lt_tank";
+			player->GiveCash(20.0);
 		} else if (ammoClip == 14) {
-			value = "char_marine";
+			value = "monster_scientist";
+			player->GiveCash(20.0);
 		} else if (ammoClip == 15) {
-			value = "char_marine";
+			value = "monster_slimy_transfer";
+			player->GiveCash(20.0);
+		} else if (ammoClip == 16) {
+			value = "monster_teleport_dropper";
+			player->GiveCash(20.0);
 		}
 
 		player->GiveCash(-20.0);

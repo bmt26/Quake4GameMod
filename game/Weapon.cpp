@@ -2657,11 +2657,14 @@ void rvWeapon::SpawnTower() {
 		if (ammoClip == 0) {
 			value = "char_kane_strogg_unarmed"; // Beacon
 			player->GiveCash(100.0);
-		//} else if (player->ReturnCash()<20.0) {
-		//	return;
+		} else if (player->ReturnCash()<20.0) {
+			return;
+		} else if (ammoClip == -1) {
+			player->GiveCash(360); // Can hurt strogg marine
+		}
 
 		//Towers
-		} else if (ammoClip == 1) {
+		else if (ammoClip == 1) {
 			value = "char_marine"; // Can hurt strogg marine
 		} else if (ammoClip == 2) {
 			value = "char_marine_shotgun"; // Can hurt failed transfer
@@ -2675,15 +2678,15 @@ void rvWeapon::SpawnTower() {
 		
 		//Traps
 		else if (ammoClip == 6) {
-			value = "char_marine_choppable_1";
+			value = "char_marine_choppable_1"; // immortal
 		} else if (ammoClip == 7) {
-			value = "char_marine_choppable_2";
+			value = "char_marine_choppable_2"; // DOT
 		} else if (ammoClip == 8) {
-			value = "char_marine_choppable_3";
+			value = "char_marine_choppable_3"; // Lots of damage
 		} else if (ammoClip == 9) {
-			value = "char_marine_choppable_4";
+			value = "char_marine_choppable_4"; // Team
 		} else if (ammoClip == 10) {
-			value = "char_marine_choppable_5";
+			value = "char_marine_choppable_5"; // Wander
 		} 
 		
 		//Enemies

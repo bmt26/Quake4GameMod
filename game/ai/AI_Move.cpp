@@ -1316,9 +1316,9 @@ bool idAI::SlideToPosition( const idVec3 &pos, float time ) {
 
 	if ( move.duration > 0 ) {
 		move.moveDir = ( pos - physicsObj.GetOrigin() ) / MS2SEC( move.duration );
-		if ( move.moveType != MOVETYPE_FLY ) {
-			move.moveDir.z = 0.0f;
-		}
+		//if ( move.moveType != MOVETYPE_FLY ) {
+		//	move.moveDir.z = 0.0f;
+		//}
 		move.speed = move.moveDir.LengthFast();
 	}
 

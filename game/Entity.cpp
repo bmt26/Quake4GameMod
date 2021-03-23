@@ -3636,9 +3636,9 @@ void idEntity::Damage( idEntity *inflictor, idEntity *attacker, const idVec3 &di
 		return;
 	}
 
-	if ( !fl.takedamage ) {
-		return;
-	}
+	//if ( !fl.takedamage ) {
+	//	return;
+	//}
 
 	if ( !inflictor ) {
 		inflictor = gameLocal.world;

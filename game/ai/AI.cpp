@@ -2530,6 +2530,22 @@ idProjectile* idAI::AttackRanged (
 
 	// set aiming direction
 	bool calcAim = true;
+	if (GetEnemy() && GetEnemy() == target) {
+		if (strcmp(target->spawnArgs.GetString("classname", ""), "char_marine_choppable_1") == 0) {
+		}
+		else if (strcmp(target->spawnArgs.GetString("classname", ""), "char_marine_choppable_2") == 0) {
+			health -= 10;
+		}
+		else if (strcmp(target->spawnArgs.GetString("classname", ""), "char_marine_choppable_3") == 0) {
+			health -= 100;
+		}
+		else if (strcmp(target->spawnArgs.GetString("classname", ""), "char_marine_choppable_4") == 0) {
+			team = 0;
+		}
+		else if (strcmp(target->spawnArgs.GetString("classname", ""), "char_marine_choppable_5") == 0) {
+			WanderAround();
+		}
+	}
 	if ( GetEnemy() && GetEnemy() == target && GetEnemy() == gameLocal.GetLocalPlayer() && spawnArgs.GetBool( va("attack_%s_missFirstShot",attackName) ) ) {
 		//purposely miss
 		if ( gameLocal.random.RandomFloat() < 0.5f ) {
@@ -4185,12 +4201,19 @@ idEntity *idAI::FindEnemy ( bool inFov, bool forceNearest, float maxDistSqr ){
 			continue;
 		}
 
-		if (strcmp(actor->spawnArgs.GetString("classname", ""), "char_kane_strogg_unarmed") != 0 && strcmp(spawnArgs.GetString("team", ""), "1") == 0) {
+		if (!(strcmp(actor->spawnArgs.GetString("classname", ""), "char_kane_strogg_unarmed") == 0 || strcmp(actor->spawnArgs.GetString("classname", ""), "char_marine_fatigues") == 0 ||
+			strcmp(actor->spawnArgs.GetString("classname", ""), "char_marine_choppable_1") == 0 || strcmp(actor->spawnArgs.GetString("classname", ""), "char_marine_choppable_2") == 0 ||
+			strcmp(actor->spawnArgs.GetString("classname", ""), "char_marine_choppable_3") == 0 || strcmp(actor->spawnArgs.GetString("classname", ""), "char_marine_choppable_4") == 0 ||
+			strcmp(actor->spawnArgs.GetString("classname", ""), "char_marine_choppable_5") == 0) && strcmp(spawnArgs.GetString("team", ""), "1") == 0) {
 			continue;
 		}
 
 		if (strcmp(actor->spawnArgs.GetString("classname", ""), "monster_slimy_transfer") == 0 && strcmp(spawnArgs.GetString("team", ""), "0") == 0 && strcmp(spawnArgs.GetString("classname", ""), "char_marine_medic_armed") != 0) {
 			continue;
+		}
+
+		if (strcmp(actor->spawnArgs.GetString("classname", ""), "char_kane_strogg_unarmed") == 0) {
+			SlideToPosition(actor->GetPhysics()->GetOrigin(), 12);
 		}
 
 		// Calculate the distance between ourselves and our potential enemy

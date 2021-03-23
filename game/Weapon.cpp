@@ -2624,7 +2624,7 @@ void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuse
 				Hitscan(dict, muzzleOrigin, muzzleAxis, num_attacks, spread, power);
 			}
 		} else {
-			if (wfl.towerSpawn&&ammoClip!=7) {
+			if (wfl.towerSpawn) {
 				SpawnTower();
 			} else {
 				LaunchProjectiles(dict, muzzleOrigin, muzzleAxis, num_attacks, spread, fuseOffset, power);
@@ -2657,8 +2657,10 @@ void rvWeapon::SpawnTower() {
 		if (ammoClip == 0) {
 			value = "char_kane_strogg_unarmed"; // Beacon
 			player->GiveCash(100.0);
-		} else if (player->ReturnCash()<20.0) {
-			return;
+		//} else if (player->ReturnCash()<20.0) {
+		//	return;
+
+		//Towers
 		} else if (ammoClip == 1) {
 			value = "char_marine"; // Default
 		} else if (ammoClip == 2) {
@@ -2669,37 +2671,53 @@ void rvWeapon::SpawnTower() {
 			value = "char_marine_medic_armed"; // Can See Invisible Enemies
 		} else if (ammoClip == 5) {
 			value = "char_marine_fatigues"; // Lots of HP Brute
-		} else if (ammoClip == 6) {
+		} 
+		
+		//Traps
+		else if (ammoClip == 6) {
+			value = "char_marine_choppable_1";
+		} else if (ammoClip == 7) {
+			value = "char_marine_choppable_2";
+		} else if (ammoClip == 8) {
+			value = "char_marine_choppable_3";
+		} else if (ammoClip == 9) {
+			value = "char_marine_choppable_4";
+		} else if (ammoClip == 10) {
+			value = "char_marine_choppable_5";
+		} 
+		
+		//Enemies
+		else if (ammoClip == 11) {
 			value = "monster_strogg_marine";
 			player->GiveCash(20.0);
-		} else if (ammoClip == 7) {
+		} else if (ammoClip == 12) {
 			value = "monster_berserker";
 			player->GiveCash(20.0);
-		} else if (ammoClip == 8) {
+		} else if (ammoClip == 13) {
 			value = "monster_failed_transfer";
 			player->GiveCash(20.0);
-		} else if (ammoClip == 9) {
+		} else if (ammoClip == 14) {
 			value = "monster_gladiator";
 			player->GiveCash(20.0);
-		} else if (ammoClip == 10) {
+		} else if (ammoClip == 15) {
 			value = "monster_grunt";
 			player->GiveCash(20.0);
-		} else if (ammoClip == 11) {
+		} else if (ammoClip == 16) {
 			value = "monster_gunner";
 			player->GiveCash(20.0);
-		} else if (ammoClip == 12) {
+		} else if (ammoClip == 17) {
 			value = "monster_ironmaiden";
 			player->GiveCash(20.0);
-		} else if (ammoClip == 13) {
+		} else if (ammoClip == 18) {
 			value = "monster_lt_tank";
 			player->GiveCash(20.0);
-		} else if (ammoClip == 14) {
+		} else if (ammoClip == 19) {
 			value = "monster_scientist";
 			player->GiveCash(20.0);
-		} else if (ammoClip == 15) {
+		} else if (ammoClip == 20) {
 			value = "monster_slimy_transfer";
 			player->GiveCash(20.0);
-		} else if (ammoClip == 16) {
+		} else if (ammoClip == 21) {
 			value = "monster_teleport_dropper";
 			player->GiveCash(20.0);
 		}

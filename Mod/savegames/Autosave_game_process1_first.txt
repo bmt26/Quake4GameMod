@@ -1,0 +1,4 @@
+"Autosave game/process1 first"
+"^:Map Start	^0DATA PROCESSING TERMINAL"
+"gfx/guis/loadscreens/process1_first"
+nooverwrite

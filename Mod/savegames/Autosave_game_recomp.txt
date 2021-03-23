@@ -1,0 +1,4 @@
+"Autosave game/recomp"
+"^:Map Start	^0RECOMPOSITION CENTER"
+"gfx/guis/loadscreens/recomp"
+nooverwrite

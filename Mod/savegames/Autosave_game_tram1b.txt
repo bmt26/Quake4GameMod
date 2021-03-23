@@ -1,0 +1,4 @@
+"Autosave game/tram1b"
+"^:Map Start	^0TRAM RAIL"
+"gfx/guis/loadscreens/tram1b"
+nooverwrite

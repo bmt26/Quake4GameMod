@@ -1,0 +1,4 @@
+"Autosave game/mcc_2"
+"^:Map Start	^0OPERATION: LAST HOPE"
+"gfx/guis/loadscreens/mcc2"
+nooverwrite

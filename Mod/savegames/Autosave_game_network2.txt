@@ -1,0 +1,4 @@
+"Autosave game/network2"
+"^:Map Start	^0DATA NETWORKING SECURITY"
+"gfx/guis/loadscreens/network2"
+nooverwrite

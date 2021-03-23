@@ -1,0 +1,4 @@
+"Autosave game/storage2"
+"^:Map Start	^0DATA STORAGE SECURITY"
+"gfx/guis/loadscreens/storage2"
+nooverwrite

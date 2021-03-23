@@ -1,0 +1,4 @@
+"Autosave game/waste"
+"^:Map Start	^0WASTE PROCESSING FACILITY"
+"gfx/guis/loadscreens/waste"
+nooverwrite

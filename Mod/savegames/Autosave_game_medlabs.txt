@@ -1,0 +1,4 @@
+"Autosave game/medlabs"
+"^:Map Start	^0STROGG MEDICAL FACILITIES"
+"gfx/guis/loadscreens/medlabs"
+nooverwrite

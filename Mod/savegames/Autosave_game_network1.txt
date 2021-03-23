@@ -1,0 +1,4 @@
+"Autosave game/network1"
+"^:Map Start	^0DATA NETWORKING TERMINAL"
+"gfx/guis/loadscreens/network1"
+nooverwrite

@@ -1,0 +1,4 @@
+"Autosave game/building_b"
+"^:Map Start	^0PERIMETER DEFENSE STATION"
+"gfx/guis/loadscreens/defstation"
+nooverwrite

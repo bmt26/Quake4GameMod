@@ -1,0 +1,4 @@
+"Autosave game/convoy1"
+"^:Map Start	^0CANYON"
+"gfx/guis/loadscreens/convoy1"
+nooverwrite

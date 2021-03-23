@@ -1,0 +1,4 @@
+"Autosave game/tram1"
+"^:Map Start	^0TRAM HUB STATION"
+"gfx/guis/loadscreens/tram1"
+nooverwrite

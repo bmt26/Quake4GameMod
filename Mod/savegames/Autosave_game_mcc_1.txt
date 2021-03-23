@@ -1,0 +1,4 @@
+"Autosave game/mcc_1"
+"^:Map Start	^0OPERATION: ADVANTAGE"
+"gfx/guis/loadscreens/mcc"
+nooverwrite

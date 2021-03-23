@@ -1,0 +1,4 @@
+"Autosave game/core2"
+"^:Map Start	^0THE NEXUS"
+"gfx/guis/loadscreens/core2"
+nooverwrite

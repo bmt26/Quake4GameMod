@@ -1,0 +1,4 @@
+"Autosave game/putra"
+"^:Map Start	^0PUTRIFICATION CENTER"
+"gfx/guis/loadscreens/putra"
+nooverwrite

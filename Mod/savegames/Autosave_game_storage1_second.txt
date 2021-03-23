@@ -1,0 +1,4 @@
+"Autosave game/storage1 second"
+"^:Map Start	^0DATA STORAGE TERMINAL"
+"gfx/guis/loadscreens/storage1_second"
+nooverwrite

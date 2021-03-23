@@ -1,0 +1,4 @@
+"Autosave game/hub2"
+"^:Map Start	^0NEXUS HUB"
+"gfx/guis/loadscreens/hub2"
+nooverwrite

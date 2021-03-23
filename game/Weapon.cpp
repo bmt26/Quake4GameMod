@@ -2662,15 +2662,15 @@ void rvWeapon::SpawnTower() {
 
 		//Towers
 		} else if (ammoClip == 1) {
-			value = "char_marine"; // Default
+			value = "char_marine"; // Can hurt strogg marine
 		} else if (ammoClip == 2) {
-			value = "char_marine_shotgun"; 
+			value = "char_marine_shotgun"; // Can hurt failed transfer
 		} else if (ammoClip == 3) {
-			value = "char_marine_hyperblaster";
+			value = "char_marine_hyperblaster"; // Can hurt berserker
 		} else if (ammoClip == 4) {
-			value = "char_marine_medic_armed"; // Can See Invisible Enemies
+			value = "char_marine_medic_armed"; // Can hurt scientist
 		} else if (ammoClip == 5) {
-			value = "char_marine_fatigues"; // Lots of HP Brute
+			value = "char_marine_fatigues"; // Lots of HP Brute & Can See Invisible Enemies
 		} 
 		
 		//Traps
@@ -2688,19 +2688,19 @@ void rvWeapon::SpawnTower() {
 		
 		//Enemies
 		else if (ammoClip == 11) {
-			value = "monster_strogg_marine";
+			value = "monster_strogg_marine"; // can only be hurt by default marine
 			player->GiveCash(20.0);
 		} else if (ammoClip == 12) {
-			value = "monster_berserker";
+			value = "monster_berserker"; // can only be hurt by hyperblaster
 			player->GiveCash(20.0);
 		} else if (ammoClip == 13) {
-			value = "monster_failed_transfer";
+			value = "monster_failed_transfer"; // can only be hurt by shotgun
 			player->GiveCash(20.0);
 		} else if (ammoClip == 14) {
 			value = "monster_gladiator";
 			player->GiveCash(20.0);
 		} else if (ammoClip == 15) {
-			value = "monster_grunt";
+			value = "monster_grunt"; 
 			player->GiveCash(20.0);
 		} else if (ammoClip == 16) {
 			value = "monster_gunner";
@@ -2712,10 +2712,10 @@ void rvWeapon::SpawnTower() {
 			value = "monster_lt_tank";
 			player->GiveCash(20.0);
 		} else if (ammoClip == 19) {
-			value = "monster_scientist";
+			value = "monster_scientist"; // can only be hurt by medic
 			player->GiveCash(20.0);
 		} else if (ammoClip == 20) {
-			value = "monster_slimy_transfer";
+			value = "monster_slimy_transfer"; //Invisible to all but brute
 			player->GiveCash(20.0);
 		} else if (ammoClip == 21) {
 			value = "monster_teleport_dropper";

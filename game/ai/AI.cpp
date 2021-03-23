@@ -4208,7 +4208,7 @@ idEntity *idAI::FindEnemy ( bool inFov, bool forceNearest, float maxDistSqr ){
 			continue;
 		}
 
-		if (strcmp(actor->spawnArgs.GetString("classname", ""), "monster_slimy_transfer") == 0 && strcmp(spawnArgs.GetString("team", ""), "0") == 0 && strcmp(spawnArgs.GetString("classname", ""), "char_marine_medic_armed") != 0) {
+		if (strcmp(actor->spawnArgs.GetString("classname", ""), "monster_slimy_transfer") == 0 && strcmp(spawnArgs.GetString("team", ""), "0") == 0 && strcmp(spawnArgs.GetString("classname", ""), "char_marine_fatigues") != 0) {
 			continue;
 		}
 

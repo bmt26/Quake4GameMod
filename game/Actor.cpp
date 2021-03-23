@@ -2457,6 +2457,17 @@ calls Damage()
 */
 void idActor::Damage( idEntity *inflictor, idEntity *attacker, const idVec3 &dir, 
 					  const char *damageDefName, const float damageScale, const int location ) {
+	if (team == 1 && inflictor && attacker) {
+		if (strcmp(spawnArgs.GetString("classname", ""), "monster_strogg_marine") == 0 && strcmp(attacker->spawnArgs.GetString("classname", ""), "char_marine") != 0) {
+			return;
+		} if (strcmp(spawnArgs.GetString("classname", ""), "monster_failed_transfer") == 0 && strcmp(attacker->spawnArgs.GetString("classname", ""), "char_marine_shotgun") != 0) {
+			return;
+		} if (strcmp(spawnArgs.GetString("classname", ""), "monster_berserker") == 0 && strcmp(attacker->spawnArgs.GetString("classname", ""), "char_marine_hyperblaster") != 0) {
+			return;
+		} if (strcmp(spawnArgs.GetString("classname", ""), "monster_scientist") == 0 && strcmp(attacker->spawnArgs.GetString("classname", ""), "char_marine_medic_armed") != 0) {
+			return;
+		}
+	}
 	if ( !fl.takedamage ) {
 		return;
 	}

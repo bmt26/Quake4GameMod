@@ -30,3 +30,6 @@ This is a Mod for Quake 4 to turn it into a tower defense style game. To play th
  
  ### GUI Changes
  The armor value on the HUD now shows how much money the play has left to spend
+ 
+ ### Mod Walkthrough GIF
+<img src='walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />

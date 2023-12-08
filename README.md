@@ -1,6 +1,6 @@
 # Quake4GameMod
 ## Overview
-This is a Mod for Quake 4 to turn it into a tower defense style game. To play this game, you need to download the Mod folder from this directory and paste it into your Quake 4 folder
+Quake4GameMod is a mod that adds tower defense aspects to the game Quake 4. The mod reworks friendly NPCs into stationary defensive towers and traps. It also reworks the enemy NPCs, which now have different features, to slowly approach a central unit with the intent to destroy it. A shop system is implemented which allows players to trade currency, which is rewarded upon enemy death, for towers. To play this game, you need to download the Mod folder from this directory and paste it into your Quake 4 folder.
 
 ## Changes
 * The pistol has been entirely reworked. Instead of firing bullets when using primary fire, it now changes the weapons selected structure of which there are 11. Holding the fire button for the secondary fire will spawn said structure infront of you, if you have enough money.
